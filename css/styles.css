@@ -1,0 +1,227 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+}
+
+.column {
+    flex: 25%;
+    max-width: 25%;
+    padding: 0;
+}
+
+.column img {
+    vertical-align: middle;
+    width: 100%;
+}
+
+.container {
+    overflow: hidden;
+    z-index: 0;
+}
+
+.container img {
+    transition: transform .3s ease;
+}
+
+.container:hover img {
+    transform: scale(1.25);
+    z-index: 0;
+    opacity: 0.8;
+}
+
+@media screen and (max-width: 1200px) {
+    .column {
+        flex: 50%;
+        max-width: 50%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .column {
+        flex: 100%;
+        max-width: 100%;
+    }
+}
+
+@media (pointer:none), (pointer:coarse) {
+    .column {
+        flex: 100%;
+        max-width: 100%;
+    }
+}
+
+div.case {
+    width: 100%;
+    text-align: center;
+    padding: 0 0 10px 0;
+}
+
+div.case video,
+div.case img {
+    max-width: 100%;
+    height: auto;
+    padding: 0;
+}
+
+div.casetext {
+    width: 80%;
+    max-width: 600px;
+    text-align: left;
+    padding: 0 20px;
+}
+
+h1, h2 {
+    color: #0072FF;
+    font-weight: 600;
+}
+
+h1 {
+    font-size: 24px;
+}
+
+h2 {
+    font-size: 14px;
+    margin-bottom: 0;
+}
+
+p {
+    color: #333;
+    font-weight: 300;
+    font-size: 14px;
+}
+
+.case {
+    margin: 10px;
+}
+
+/* Regel voor afbeeldingen en lokaal gehoste videos (blijft 600px) */
+.case img,
+.case video {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* 1. De container die de beeldverhouding bepaalt */
+.video-responsive-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* Dit creëert een 16:9 ratio (9 / 16 = 0.5625) */
+    height: 0;
+    overflow: hidden;
+}
+
+/* 2. De iframe die de container volledig vult */
+.video-responsive-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0; /* Verwijder eventuele randen */
+}
+
+/* 3. De bovenliggende .case-container die de maximale breedte bepaalt */
+div.case {
+    width: 100%;
+    max-width: 1200px; /* Pas deze waarde aan naar de gewenste maximale breedte */
+    margin: 20px auto; /* Centreert de hele case-container */
+    text-align: center;
+}
+
+/* wanneer video eindigt op 'square' */
+.video-square-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%; /* 1:1 Aspect Ratio (Vierkant) */
+    height: 0;
+    overflow: hidden;
+}
+
+.video-square-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* Voor staande (portret) responsive videos */
+.video-portrait-wrapper {
+    position: relative;
+    width: 100%;
+    /* 9:16 Aspect Ratio (16 / 9 = 1.777) */
+    padding-bottom: 177.77%;
+    height: 0;
+    overflow: hidden;
+}
+
+.video-portrait-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.video-container-horizontal {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%; /* Ensure the container takes full width */
+}
+
+.video-container-horizontal .case {
+    flex: 1 1 100%; /* Default to full width for smaller screens */
+    margin: 10px; /* Add margin for spacing between videos */
+}
+
+.video-container-horizontal .case video {
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow for better visuals */
+    border-radius: 8px; /* Optional: Add border radius for rounded corners */
+}
+
+
+/* wanneer video eindigt op 'long' */
+.video-container-vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%; /* Reduce the width to make the div smaller */
+    margin: 0 auto; /* Center the div horizontally */
+}
+
+.video-container-vertical .case {
+    margin: 10px;
+}
+
+.video-container-vertical .case video {
+    width: 100%;
+    max-width: 400px; /* Adjust the max-width to make the video smaller */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow for better visuals */
+    border-radius: 8px; /* Optional: Add border radius for rounded corners */
+}
+
+
+/* Media query for desktop screens */
+@media (min-width: 768px) {
+    .video-container-horizontal .case {
+        flex: 1 1 45%; /* Ensure each case takes 45% of the container */
+    }
+}

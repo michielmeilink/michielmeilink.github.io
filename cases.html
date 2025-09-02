@@ -1,0 +1,67 @@
+<html>
+<head>
+	<link rel="stylesheet" href="css/styles.css">
+	<link rel="stylesheet" href="css/menu.css">
+</head>
+
+<body>
+<?php include 'menu.html'; ?>
+<br>
+
+<?php
+$case = $_GET['case'];
+include 'cases/' . $case . '/case.php';
+
+$squareVideosOutput = "";
+
+if ($handle = opendir('cases/' . $case)) {
+    while (false !== ($entry = readdir($handle))) {
+        if ($entry != "." && $entry != "..") {
+            // If it's a .jpg file
+            if (str_contains($entry, '.jpg')) {
+                echo "<div class=\"case\"><img src=\"cases/" . $case . "/" . $entry . "\"></div>";
+            }
+            // If it's a _muted.mp4 file
+            else if (str_contains($entry, '_muted.mp4')) {
+                echo "<div class=\"case\"><video autoplay muted loop><source src=\"cases/" . $case . "/" . $entry . "\" type=\"video/mp4\"></video></div>";
+            }
+            // If it's a square.mp4 file (this will align videos horizontally)
+            else if (str_contains($entry, 'square.mp4')) {
+                if (empty($squareVideosOutput)) {
+                    $squareVideosOutput = "<div class=\"video-container-horizontal\">";
+                }
+                $squareVideosOutput .= "<div class=\"case\"><video controls loop><source src=\"cases/" . $case . "/" . $entry . "\" type=\"video/mp4\"></video></div>";
+
+            }
+
+						// If it's a long.mp4 file (this will align videos horizontally)
+						else if (str_contains($entry, 'long.mp4')) {
+						    if (empty($longVideosOutput)) {
+						        $longVideosOutput = "<div class=\"video-container-vertical\">";
+						    }
+						    $longVideosOutput .= "<div class=\"case\"><video controls loop><source src=\"cases/" . $case . "/" . $entry . "\" type=\"video/mp4\"></video></div>";
+
+						}
+
+            // If it's any other .mp4 file
+            else if (str_contains($entry, '.mp4')) {
+                echo "<div class=\"case\"><video controls loop><source src=\"cases/" . $case . "/" . $entry . "\" type=\"video/mp4\"></video></div>";
+            }
+            // If it's a .png file
+            else if (str_contains($entry, '.png')) {
+                echo "<div class=\"case\"><img src=\"cases/" . $case . "/" . $entry . "\"></div>";
+            }
+        }
+    }
+    closedir($handle);
+
+    // Output square.mp4 videos if any were found
+    if (!empty($squareVideosOutput)) {
+        $squareVideosOutput .= "</div>";
+        echo $squareVideosOutput;
+    }
+}
+?>
+
+</body>
+</html>
