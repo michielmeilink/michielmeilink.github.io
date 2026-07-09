@@ -39,3 +39,7 @@ URL's, HTML-structuur (op logo-maat na), menu-fetch, filter-JS, embeds, OG-tags,
 
 ## Verificatie
 Grep-checks op tokens en verdwenen gradient-hovers; lokale servercheck home/case/about; push + livecheck.
+
+## Addendum v3.1 — lichte grond (9 juli 2026, na feedback "zwarte achtergrond is niet mooi")
+
+Zelfde quiet-stijl, maar op koel bijna-wit in plaats van antraciet. Kleur gekozen op temperatuur van het logo (blauw→cyaan): koel, geen warm crème (v1) en geen hard #fff. Tokens: `--bg: #fafbfc`, `--ink: #1d1f21`, `--ink-soft: #73777b`, `--line: #e4e6e8`. De tile-hover-overlay (zwart-transparant + witte tekst) ligt op de thumb en blijft ongewijzigd. Verder niets aangepast.

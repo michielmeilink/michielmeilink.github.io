@@ -6,10 +6,10 @@
 
 /* ===== Tokens ===== */
 :root {
-  --bg: #272727;
-  --ink: #fff;
-  --ink-soft: #9a9a9a;
-  --line: #3a3a3a;
+  --bg: #fafbfc;
+  --ink: #1d1f21;
+  --ink-soft: #73777b;
+  --line: #e4e6e8;
   --font-display: 'Inter', 'Helvetica Neue', Arial, sans-serif;
   --font-body: 'Inter', 'Helvetica Neue', Arial, sans-serif;
   --sidebar-w: 250px;
