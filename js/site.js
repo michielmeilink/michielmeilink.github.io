@@ -95,6 +95,16 @@ document.documentElement.classList.replace('no-js', 'js');
         var r = bar.getBoundingClientRect();
         if (video.duration) video.currentTime = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)) * video.duration;
       });
+      var fs = p.querySelector('.player-fs');
+      if (fs) fs.addEventListener('click', function () {
+        if (document.fullscreenElement === p) {
+          document.exitFullscreen();
+        } else if (p.requestFullscreen) {
+          p.requestFullscreen();
+        } else if (video.webkitEnterFullscreen) {
+          video.webkitEnterFullscreen(); // iPhone Safari: alleen native fullscreen op de video zelf
+        }
+      });
       syncPlay();
       syncMute();
     })(players[i]);
