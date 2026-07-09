@@ -180,7 +180,7 @@ html.no-js .content { margin-left: 0; }
 @keyframes ticker { to { transform: translateX(-50%); } }
 
 /* ===== Case-pagina ===== */
-.case-article { max-width: 980px; }
+.case-article { max-width: none; }
 .case-article h1 {
   font-family: var(--font-display);
   font-size: clamp(28px, 4vw, 42px);
@@ -218,7 +218,7 @@ html.no-js .content { margin-left: 0; }
 }
 .case-meta dd { margin: 0; font-size: 14px; font-weight: 600; }
 .case-intro { max-width: 640px; font-size: 17px; font-weight: 500; line-height: 1.55; color: var(--ink); margin: 0 0 40px; }
-div.case { width: 100%; max-width: 980px; margin: 0 0 32px; }
+div.case { width: 100%; margin: 0 0 32px; }
 div.case img, div.case video { max-width: 100%; height: auto; }
 .case-nav {
   display: flex;
