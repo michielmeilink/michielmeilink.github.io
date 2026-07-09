@@ -340,10 +340,17 @@ div.case img, div.case video { max-width: 100%; height: auto; }
     border-top: 1px solid var(--line);
   }
   .case-nav a {
-    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--grad);
+    color: #fff;
+    font-size: 21px;
     line-height: 1;
-    color: var(--ink);
-    padding: 8px 14px;
+    box-shadow: 0 4px 12px rgba(0, 114, 255, .3);
   }
   .menu-toggle {
     width: 34px; height: 34px;
