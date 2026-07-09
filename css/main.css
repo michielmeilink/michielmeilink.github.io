@@ -213,10 +213,10 @@ html.no-js .content { margin-left: 0; }
 .case-article { max-width: none; }
 .case-article h1 {
   font-family: var(--font-display);
-  font-size: clamp(28px, 4vw, 42px);
+  font-size: clamp(22px, 2.4vw, 30px);
   font-weight: 700;
   letter-spacing: -.01em;
-  margin: 0 0 22px;
+  margin: 0 0 16px;
   background: var(--grad);
   -webkit-background-clip: text;
   background-clip: text;
@@ -228,8 +228,8 @@ html.no-js .content { margin-left: 0; }
   display: flex;
   flex-wrap: wrap;
   gap: 10px 36px;
-  margin: 0 0 30px;
-  padding: 18px 0;
+  margin: 0 0 24px;
+  padding: 13px 0;
   border-bottom: 1px solid var(--line);
 }
 .case-meta::before {
@@ -249,9 +249,9 @@ html.no-js .content { margin-left: 0; }
 .case-meta dd { margin: 0; font-size: 14px; font-weight: 600; }
 .case-intro { max-width: 620px; font-size: 15px; font-weight: 400; line-height: 1.6; color: var(--ink); margin: 0 0 36px; }
 /* Video's passen altijd volledig in de schermhoogte (240px = ruimte voor titel/meta) */
-div.case { width: 100%; margin: 0 0 32px; max-width: min(100%, calc((100vh - 240px) * 1.7778)); }
-div.case:has(.video-square-wrapper) { max-width: min(100%, calc(100vh - 240px)); }
-div.case:has(.video-portrait-wrapper) { max-width: min(100%, calc((100vh - 240px) * .5625)); }
+div.case { width: 100%; margin: 0 0 32px; max-width: min(100%, calc((100vh - 300px) * 1.7778)); }
+div.case:has(.video-square-wrapper) { max-width: min(100%, calc(100vh - 300px)); }
+div.case:has(.video-portrait-wrapper) { max-width: min(100%, calc((100vh - 300px) * .5625)); }
 .video-container-horizontal .case, .video-container-horizontal .case:has(.video-square-wrapper), .video-container-horizontal .case:has(.video-portrait-wrapper) { max-width: none; }
 div.case img, div.case video { max-width: 100%; height: auto; }
 /* Vorige/volgende case: alleen op mobiel, alleen pijlen */
@@ -344,17 +344,14 @@ div.case img, div.case video { max-width: 100%; height: auto; }
     border-top: 1px solid var(--line);
   }
   .case-nav a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: var(--grad);
-    color: #fff;
-    font-size: 21px;
+    padding: 8px 12px;
+    font-size: 28px;
+    font-weight: 600;
     line-height: 1;
-    box-shadow: 0 4px 12px rgba(0, 114, 255, .3);
+    background: var(--grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
   .menu-toggle {
     width: 34px; height: 34px;
