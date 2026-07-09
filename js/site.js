@@ -63,6 +63,21 @@ document.documentElement.classList.replace('no-js', 'js');
       applyFilter();
     });
 
+  // Casetitel in woorden splitsen voor de reveal-animatie (CSS regelt beweging + verloop)
+  var title = document.querySelector('.case-article h1');
+  if (title) {
+    var words = title.textContent.trim().split(/\s+/);
+    title.textContent = '';
+    for (var w = 0; w < words.length; w++) {
+      var span = document.createElement('span');
+      span.className = 'w';
+      span.textContent = words[w];
+      span.style.animationDelay = (w * 70) + 'ms';
+      title.appendChild(span);
+      if (w < words.length - 1) title.appendChild(document.createTextNode(' '));
+    }
+  }
+
   window.addEventListener('hashchange', applyFilter);
   applyFilter();
 })();

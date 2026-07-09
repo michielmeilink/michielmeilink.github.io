@@ -150,6 +150,35 @@ html.no-js .content { margin-left: 0; }
 .tile-client { font-size: 13.5px; font-weight: 500; color: #fff; }
 .tile-type { font-size: 12px; color: rgba(255, 255, 255, .85); white-space: nowrap; }
 
+/* ===== Clientnamen-ticker (homepage) ===== */
+.ticker {
+  overflow: hidden;
+  max-width: 1400px;
+  margin-top: 46px;
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.ticker-track { display: flex; width: max-content; }
+.ticker-group {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding-right: 28px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+.ticker-dot {
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@keyframes ticker { to { transform: translateX(-50%); } }
+
 /* ===== Case-pagina ===== */
 .case-article { max-width: 980px; }
 .case-article h1 {
@@ -246,6 +275,22 @@ div.case img, div.case video { max-width: 100%; height: auto; }
 @media (prefers-reduced-motion: no-preference) {
   .tile-caption { transition: opacity .2s ease; }
   .menu-cat li a, .menu-foot a, .menu-social a { transition: color .15s ease; }
+  .ticker-track { animation: ticker 50s linear infinite; }
+  .ticker:hover .ticker-track { animation-play-state: paused; }
+  .case-article h1 .w {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: word-in .45s cubic-bezier(.22, .61, .36, 1) forwards;
+  }
+}
+@keyframes word-in { to { opacity: 1; transform: none; } }
+/* Reveal-woorden: eigen verloop per woord (transform breekt background-clip van de parent) */
+.case-article h1 .w {
+  display: inline-block;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
