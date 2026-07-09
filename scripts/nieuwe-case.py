@@ -70,6 +70,7 @@ def main():
     orde = list(dict.fromkeys(orde))
     eerste, laatste = orde[0], orde[-1]
     versie = re.search(r'main\.css\?v=(\d+)', index_html).group(1)
+    js_versie = re.search(r'site\.js\?v=(\d+)', index_html).group(1)
 
     # --- Videoblokken: liggende los, vierkant/staand samen in een rij ---
     losse, samen = [], []
@@ -108,7 +109,7 @@ def main():
 <meta property="og:type" content="article">
 <link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="/css/main.css?v={versie}">
-<script src="/js/site.js?v=34" defer></script>
+<script src="/js/site.js?v={js_versie}" defer></script>
 </head>
 <body>
 <aside id="site-menu" class="sidebar"></aside>

@@ -63,6 +63,44 @@ document.documentElement.classList.replace('no-js', 'js');
       applyFilter();
     });
 
+  // Eigen minimale videospeler voor self-hosted mp4's
+  function initPlayers() {
+    var players = document.querySelectorAll('.player');
+    for (var i = 0; i < players.length; i++) (function (p) {
+      var video = p.querySelector('video');
+      var play = p.querySelector('.player-play');
+      var mute = p.querySelector('.player-mute');
+      var bar = p.querySelector('.player-progress');
+      var fill = p.querySelector('.player-progress-fill');
+      video.removeAttribute('controls');
+      function toggle() { if (video.paused) { video.play(); } else { video.pause(); } }
+      function syncPlay() {
+        p.classList.toggle('is-playing', !video.paused);
+        play.setAttribute('aria-label', video.paused ? 'Play' : 'Pause');
+      }
+      function syncMute() {
+        p.classList.toggle('is-muted', video.muted);
+        mute.setAttribute('aria-label', video.muted ? 'Unmute' : 'Mute');
+      }
+      play.addEventListener('click', toggle);
+      video.addEventListener('click', toggle);
+      mute.addEventListener('click', function () { video.muted = !video.muted; });
+      video.addEventListener('play', syncPlay);
+      video.addEventListener('pause', syncPlay);
+      video.addEventListener('volumechange', syncMute);
+      video.addEventListener('timeupdate', function () {
+        if (video.duration) fill.style.width = (video.currentTime / video.duration * 100) + '%';
+      });
+      bar.addEventListener('click', function (e) {
+        var r = bar.getBoundingClientRect();
+        if (video.duration) video.currentTime = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)) * video.duration;
+      });
+      syncPlay();
+      syncMute();
+    })(players[i]);
+  }
+  initPlayers();
+
   // Casetitel in woorden splitsen voor de reveal-animatie (CSS regelt beweging + verloop)
   var title = document.querySelector('.case-article h1');
   if (title) {
