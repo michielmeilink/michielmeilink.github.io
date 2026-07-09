@@ -64,7 +64,7 @@ HTML-bestand per case = `cases/<map>/<map>.html` (bv. `cases/durex/durex.html`).
 **Interfaces:**
 - Produces: schone repo zonder ongebruikte bestanden; latere taken hoeven nergens rekening te houden met `cases/css/` of `_case/`.
 
-- [ ] **Step 1: Controleer dat de te verwijderen bestanden nergens gerefereerd worden**
+- [x] **Step 1: Controleer dat de te verwijderen bestanden nergens gerefereerd worden**
 
 Run:
 ```bash
@@ -73,7 +73,7 @@ grep -rn "grid.html\|_case\|cases/css\|DSC08251\|logo3" --include="*.html" .
 ```
 Expected: geen output (exit code 1). Als een bestand wél gerefereerd wordt: dat bestand NIET verwijderen en de referentie noteren in het taakverslag.
 
-- [ ] **Step 2: Verwijder de bestanden uit git en van schijf**
+- [x] **Step 2: Verwijder de bestanden uit git en van schijf**
 
 ```bash
 cd /Users/michiel/Documents/michielmeilink.github.io
@@ -83,12 +83,12 @@ rmdir files 2>/dev/null || true
 ```
 (`files/` is een lege, niet-getrackte map; `images/IMG_6923.jpg` blijft — die is de hero op about.html; `images/logo5.png` blijft — dat is het logo.)
 
-- [ ] **Step 3: Verifieer**
+- [x] **Step 3: Verifieer**
 
 Run: `git status --short && git ls-files | grep -iE 'DS_Store|grid|_case|cases/css|DSC08251|logo3' || echo SCHOON`
 Expected: alleen `D`-regels in status, daarna `SCHOON`.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git commit -m "chore: remove unused files and .DS_Store from repo"
@@ -104,7 +104,7 @@ git commit -m "chore: remove unused files and .DS_Store from repo"
 **Interfaces:**
 - Produces: alle thumbs exact 800×800px, totaal `thumbs/` < 1,5 MB. Bestandsnamen wijzigen NIET (index.html verwijst er straks naar).
 
-- [ ] **Step 1: Resize de ene te grote thumb en hercomprimeer alles**
+- [x] **Step 1: Resize de ene te grote thumb en hercomprimeer alles**
 
 ```bash
 cd /Users/michiel/Documents/michielmeilink.github.io
@@ -114,12 +114,12 @@ sips -Z 1600 images/IMG_6923.jpg
 sips -s format jpeg -s formatOptions 70 images/IMG_6923.jpg --out images/IMG_6923.jpg >/dev/null
 ```
 
-- [ ] **Step 2: Verifieer maten en totaalgrootte**
+- [x] **Step 2: Verifieer maten en totaalgrootte**
 
 Run: `sips -g pixelWidth thumbs/arriva_dienstregeling.jpg && du -sh thumbs images && find thumbs -size +150k`
 Expected: pixelWidth 800; `thumbs` ≤ ~1,5M (was 3,1M); geen bestanden > 150 kB. Controleer visueel (Quick Look) dat 2–3 thumbs er nog goed uitzien; bij zichtbare artefacten `formatOptions 80` gebruiken en opnieuw draaien vanaf de git-versie (`git checkout thumbs/ && …`).
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add thumbs images/IMG_6923.jpg
@@ -138,7 +138,7 @@ git commit -m "perf: compress thumbnails (800px, q70) and about hero image"
 - Produces: exacte bestandsnamen voor Task 4's `@font-face`:
   `fonts/display-500.woff2`, `fonts/display-700.woff2`, `fonts/body-400.woff2`, `fonts/body-500.woff2` — plus de gekozen font-family-namen voor de CSS-variabelen `--font-display` en `--font-body`.
 
-- [ ] **Step 1: Maak de preview-pagina met de drie kandidaat-combinaties**
+- [x] **Step 1: Maak de preview-pagina met de drie kandidaat-combinaties**
 
 Schrijf `font-preview.html` (laadt voor de preview éénmalig van Google Fonts CDN — dit bestand wordt niet gecommit en daarna verwijderd):
 
@@ -180,11 +180,11 @@ Schrijf `font-preview.html` (laadt voor de preview éénmalig van Google Fonts C
 </html>
 ```
 
-- [ ] **Step 2: CHECKPOINT — laat Michiel kiezen**
+- [x] **Step 2: CHECKPOINT — laat Michiel kiezen**
 
 Open `font-preview.html` in de browser (`open font-preview.html`) en vraag Michiel welke van de drie combinaties het wordt. **Wacht op antwoord; niet verder zonder keuze.** Kiest hij "kies jij" → combinatie 1 (Space Grotesk + Inter).
 
-- [ ] **Step 3: Download de gekozen fonts als woff2**
+- [x] **Step 3: Download de gekozen fonts als woff2**
 
 Voor combinatie 1 (pas de eerste URL aan bij keuze 2 → `sora?...&variants=600,700` of keuze 3 → `fraunces?...&variants=600,700`):
 
@@ -202,12 +202,12 @@ rm font-preview.html
 ```
 Fallback als gwfh.mranftl.com niet bereikbaar is: download de familie via https://fonts.google.com ("Get font" → download), pak de statische woff2/ttf-varianten en converteer ttf indien nodig NIET — gebruik dan de variable-font woff2 en noteer dat in het taakverslag.
 
-- [ ] **Step 4: Verifieer**
+- [x] **Step 4: Verifieer**
 
 Run: `ls -la fonts/ && file fonts/*.woff2`
 Expected: 4 bestanden, elk herkend als "Web Open Font Format (Version 2)", elk < 80 kB.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add fonts
@@ -226,7 +226,7 @@ git commit -m "feat: self-host chosen webfonts (display + body, woff2)"
 - Consumes: `fonts/display-500.woff2`, `fonts/display-700.woff2`, `fonts/body-400.woff2`, `fonts/body-500.woff2` (Task 3). Als in Task 3 een andere familie dan Space Grotesk/Inter is gekozen: pas ALLEEN de `font-family`-namen in de `@font-face`-blokken en de twee custom properties aan.
 - Produces: alle class-namen die Task 5–9 gebruiken: `.sidebar`, `.sidebar-inner`, `.mobile-bar`, `.menu-toggle`, `.menu-logo`, `.menu-tagline`, `.menu-nav`, `.menu-all`, `.menu-cat`, `.menu-cat-title`, `.menu-foot`, `.menu-social`, `.is-active`, `.content`, `.grid`, `.tile`, `.tile-media`, `.tile-caption`, `.tile-client`, `.tile-type`, `.case-article`, `.case-meta`, `.case-intro`, `.case`, `.case-nav`, `.case-nav-prev`, `.case-nav-next`, `.video-responsive-wrapper`, `.video-square-wrapper`, `.video-portrait-wrapper`, `.about-hero`, `.noscript-nav`, `body.menu-open`, `html.no-js`.
 
-- [ ] **Step 1: Schrijf `css/main.css` integraal**
+- [x] **Step 1: Schrijf `css/main.css` integraal**
 
 ```css
 /* ===== Fonts (self-hosted) ===== */
@@ -434,6 +434,13 @@ div.case img, div.case video { max-width: 100%; height: auto; }
   position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;
 }
 
+/* Meerdere vierkante/portret-video's naast elkaar (bestaand gedrag) */
+.video-container-horizontal { display: flex; flex-wrap: wrap; gap: 20px; }
+.video-container-horizontal .case { flex: 1 1 100%; margin: 0 0 6px; min-width: 0; }
+@media (min-width: 768px) {
+  .video-container-horizontal .case { flex: 1 1 45%; }
+}
+
 /* ===== About ===== */
 .about-hero {
   border-radius: 12px;
@@ -459,6 +466,10 @@ div.case img, div.case video { max-width: 100%; height: auto; }
   .grid .tile:nth-child(n+7) { animation-delay: .34s; }
 }
 @keyframes tile-in { to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
 
 /* ===== Responsive ===== */
 @media (max-width: 1100px) {
@@ -520,7 +531,7 @@ div.case img, div.case video { max-width: 100%; height: auto; }
 }
 ```
 
-- [ ] **Step 2: Verifieer dat de CSS parsebaar is en de fontpaden kloppen**
+- [x] **Step 2: Verifieer dat de CSS parsebaar is en de fontpaden kloppen**
 
 Run:
 ```bash
@@ -530,7 +541,7 @@ grep -o "/fonts/[a-z0-9-]*\.woff2" css/main.css | sort -u | while read p; do tes
 ```
 Expected: `4`, daarna vier regels `OK /fonts/...`.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add css/main.css
@@ -554,7 +565,7 @@ git commit -m "feat: add main.css with design tokens, sidebar layout, grid and c
   ```
   plus in `<head>`: `<script src="/js/site.js" defer></script>` en op `<html>`: `class="no-js"`.
 
-- [ ] **Step 1: Schrijf `menu.html` integraal (vervangt de oude inhoud volledig)**
+- [x] **Step 1: Schrijf `menu.html` integraal (vervangt de oude inhoud volledig)**
 
 ```html
 <div class="mobile-bar">
@@ -609,7 +620,7 @@ git commit -m "feat: add main.css with design tokens, sidebar layout, grid and c
 </div>
 ```
 
-- [ ] **Step 2: Schrijf `js/site.js` integraal**
+- [x] **Step 2: Schrijf `js/site.js` integraal**
 
 ```js
 document.documentElement.classList.replace('no-js', 'js');
@@ -682,7 +693,7 @@ document.documentElement.classList.replace('no-js', 'js');
 })();
 ```
 
-- [ ] **Step 3: Verifieer links in menu.html tegen de bestaande bestanden**
+- [x] **Step 3: Verifieer links in menu.html tegen de bestaande bestanden**
 
 Run:
 ```bash
@@ -691,7 +702,7 @@ grep -o 'href="/cases/[^"]*"' menu.html | sed 's/href="\(.*\)"/\1/' | while read
 ```
 Expected: `20 OK`-regels (via uniq-telling: alleen OK, nul KAPOT).
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add menu.html js/site.js
@@ -709,7 +720,7 @@ git commit -m "feat: shared sidebar menu with categories and hash-filter script"
 - Consumes: snippet + `js/site.js` (Task 5), classes uit `css/main.css` (Task 4), canonieke volgorde-tabel.
 - Produces: 20 `.tile`-elementen met `data-category`, in canonieke volgorde.
 
-- [ ] **Step 1: Schrijf `index.html` integraal**
+- [x] **Step 1: Schrijf `index.html` integraal**
 
 Kop en shell exact zo; de 20 tegels volgen de canonieke tabel (hieronder staan alle 20 uitgeschreven):
 
@@ -827,7 +838,7 @@ Kop en shell exact zo; de 20 tegels volgen de canonieke tabel (hieronder staan a
 
 Let op: de eerste 3 tegels hebben bewust GEEN `loading="lazy"` (boven de vouw), de rest wel.
 
-- [ ] **Step 2: Verifieer structuur**
+- [x] **Step 2: Verifieer structuur**
 
 Run:
 ```bash
@@ -839,12 +850,12 @@ grep -o 'src="/thumbs/[^"]*"' index.html | sed 's/src="\(.*\)"/\1/' | while read
 ```
 Expected: `20`, `17`, en geen KAPOT-regels.
 
-- [ ] **Step 3: Browsercheck filter**
+- [x] **Step 3: Browsercheck filter**
 
 Run: `cd /Users/michiel/Documents/michielmeilink.github.io && python3 -m http.server 8000` (achtergrond) en open `http://localhost:8000/`.
 Check: zijbalk laadt; klik "Animation" → 12 tegels, hash wordt `#animation`; klik "Video" → 8 tegels; "All work" → 20; hard refresh op `http://localhost:8000/#video` toont direct alleen video-tegels. Stop de server daarna.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add index.html
@@ -862,7 +873,7 @@ git commit -m "feat: rebuild homepage as filterable work grid with captions and 
 - Consumes: snippet uit Task 5, classes uit Task 4.
 - Produces: het exacte sjabloon dat Task 8 op de overige 19 cases toepast.
 
-- [ ] **Step 1: Schrijf `cases/durex/durex.html` integraal**
+- [x] **Step 1: Schrijf `cases/durex/durex.html` integraal**
 
 ```html
 <!DOCTYPE html>
@@ -909,12 +920,12 @@ git commit -m "feat: rebuild homepage as filterable work grid with captions and 
 </html>
 ```
 
-- [ ] **Step 2: Browsercheck**
+- [x] **Step 2: Browsercheck**
 
 Start `python3 -m http.server 8000`, open `http://localhost:8000/cases/durex/durex.html`.
 Check: zijbalk laadt en "Durex" is gemarkeerd (is-active); meta-rij toont Client/Agency/Role/Type; video speelt; Previous → Combi Outboards, Next → FrieslandCampina werken. Mobiel formaat (responsive mode 390px): topbalk + hamburger werkt.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add cases/durex/durex.html
@@ -967,9 +978,9 @@ git commit -m "feat: new case template applied to durex (reference case)"
 
 (Type per case staat in de canonieke tabel bovenaan het plan.)
 
-- [ ] **Step 1: Pas het sjabloon toe op alle 19 bestanden** (volgens de werkwijze en tabellen hierboven; embeds en beschrijvende teksten uit de huidige bestanden overnemen — eerst het huidige bestand lezen, dan herschrijven)
+- [x] **Step 1: Pas het sjabloon toe op alle 19 bestanden** (volgens de werkwijze en tabellen hierboven; embeds en beschrijvende teksten uit de huidige bestanden overnemen — eerst het huidige bestand lezen, dan herschrijven)
 
-- [ ] **Step 2: Verifieer over alle 20 cases**
+- [x] **Step 2: Verifieer over alle 20 cases**
 
 Run:
 ```bash
@@ -984,7 +995,7 @@ grep -c 'youtube.com/embed' cases/*/[a-z]*.html
 ```
 Expected: geen MIST/KAPOT-regels; het aantal embeds per case gelijk aan vóór de wijziging (totaal 39: arriva 1, arrivadienstregeling 1, arrivaopstapper 2, arturo 4, bb_showreel 1, capetracks 1, combi_outboards 1, daelmans 2, doritos 2, durex 1, ecoline 1, ezeetabs 3, frieslandcampina 3, jan_pannenkoek 1, livium 2, quakercruesli 4, raakpuur 2, summerrain 2, vegter 2, verkade 3).
 
-- [ ] **Step 3: Controleer de prev/next-ketting**
+- [x] **Step 3: Controleer de prev/next-ketting**
 
 Run:
 ```bash
@@ -993,11 +1004,11 @@ for f in cases/*/[a-z]*.html; do echo "$f: prev=$(grep -o 'case-nav-prev" href="
 ```
 Expected: elke case verwijst naar zijn buren in de canonieke volgorde; `durex` prev=combi_outboards; `combi_outboards` next=durex.
 
-- [ ] **Step 4: Steekproef in de browser**
+- [x] **Step 4: Steekproef in de browser**
 
 Start server, open 3 cases (`arturo` — 4 vierkante video's, `arrivaopstapper` — portret + vierkant, `verkade` — mix) en klik de hele prev/next-ketting minimaal 5 stappen door.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add cases
@@ -1014,7 +1025,7 @@ git commit -m "feat: apply new case template with meta row, OG tags and prev/nex
 **Interfaces:**
 - Consumes: snippet Task 5, classes Task 4, hero `images/IMG_6923.jpg` (gecomprimeerd in Task 2).
 
-- [ ] **Step 1: Schrijf `about.html` integraal**
+- [x] **Step 1: Schrijf `about.html` integraal**
 
 ```html
 <!DOCTYPE html>
@@ -1048,11 +1059,11 @@ git commit -m "feat: apply new case template with meta row, OG tags and prev/nex
 ```
 Let op: controleer de werkelijke pixelmaten van `images/IMG_6923.jpg` na Task 2 (`sips -g pixelWidth -g pixelHeight images/IMG_6923.jpg`) en zet die in de `width`/`height`-attributen.
 
-- [ ] **Step 2: Browsercheck**
+- [x] **Step 2: Browsercheck**
 
 Server aan, open `http://localhost:8000/about.html`: zijbalk met "About" gemarkeerd, hero netjes afgerond, tekst leesbaar; mobiel formaat OK.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add about.html
@@ -1066,18 +1077,18 @@ git commit -m "feat: restyle about page in new layout with meta tags"
 **Files:**
 - Delete: `css/styles.css`, `css/menu.css`
 
-- [ ] **Step 1: Controleer dat niets meer naar de oude CSS verwijst**
+- [x] **Step 1: Controleer dat niets meer naar de oude CSS verwijst**
 
 Run: `cd /Users/michiel/Documents/michielmeilink.github.io && grep -rn "styles.css\|menu.css" --include="*.html" .`
 Expected: geen output. (Wel output → die pagina is gemist in Task 6–9; eerst fixen.)
 
-- [ ] **Step 2: Verwijder de oude bestanden**
+- [x] **Step 2: Verwijder de oude bestanden**
 
 ```bash
 git rm css/styles.css css/menu.css
 ```
 
-- [ ] **Step 3: Volledige lokale eindcontrole**
+- [x] **Step 3: Volledige lokale eindcontrole**
 
 Start `python3 -m http.server 8000` en loop na:
 1. Home: 20 tegels, fade-in, hover (zoom + verloop-bijschrift), filter Animation/Video, deelbare hash-URL.
@@ -1088,7 +1099,7 @@ Start `python3 -m http.server 8000` en loop na:
 6. JS uit (DevTools → Settings → Disable JavaScript): noscript-navigatie zichtbaar, content full-width, geen lege zijbalkstrook.
 7. `curl -s http://localhost:8000/menu.html | head -3` levert de mobile-bar HTML.
 
-- [ ] **Step 4: Commit en push naar GitHub Pages**
+- [x] **Step 4: Commit en push naar GitHub Pages**
 
 ```bash
 git commit -m "chore: remove superseded stylesheets"
@@ -1096,7 +1107,7 @@ git push origin main
 ```
 (Branchnaam checken met `git branch --show-current`; als het `master` is, dat gebruiken.)
 
-- [ ] **Step 5: Livecheck**
+- [x] **Step 5: Livecheck**
 
 Wacht ~2 min op de Pages-build en check:
 ```bash
@@ -1107,6 +1118,6 @@ curl -sI https://michielmeilink.com/css/main.css | head -3
 ```
 Expected: HTTP 200, `20`, `2`, HTTP 200. Daarna handmatige check van de live site op desktop + telefoon, en een WhatsApp/LinkedIn-preview-test van 1 case-URL (via https://www.opengraph.xyz of door de link in een chat te plakken).
 
-- [ ] **Step 6: Afronden**
+- [x] **Step 6: Afronden**
 
 Meld aan Michiel dat de site live staat, met de verificatie-uitkomsten. Nieuwe case toevoegen is voortaan: case-map kopiëren + thumbnail in `thumbs/` + één tegel in `index.html` + één regel in `menu.html` + prev/next van de buren bijwerken.
