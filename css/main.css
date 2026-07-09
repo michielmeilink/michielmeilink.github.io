@@ -247,8 +247,12 @@ html.no-js .content { margin-left: 0; }
   margin-bottom: 2px;
 }
 .case-meta dd { margin: 0; font-size: 14px; font-weight: 600; }
-.case-intro { max-width: 640px; font-size: 17px; font-weight: 500; line-height: 1.55; color: var(--ink); margin: 0 0 40px; }
-div.case { width: 100%; margin: 0 0 32px; }
+.case-intro { max-width: 620px; font-size: 15px; font-weight: 400; line-height: 1.6; color: var(--ink); margin: 0 0 36px; }
+/* Video's passen altijd volledig in de schermhoogte (240px = ruimte voor titel/meta) */
+div.case { width: 100%; margin: 0 0 32px; max-width: min(100%, calc((100vh - 240px) * 1.7778)); }
+div.case:has(.video-square-wrapper) { max-width: min(100%, calc(100vh - 240px)); }
+div.case:has(.video-portrait-wrapper) { max-width: min(100%, calc((100vh - 240px) * .5625)); }
+.video-container-horizontal .case, .video-container-horizontal .case:has(.video-square-wrapper), .video-container-horizontal .case:has(.video-portrait-wrapper) { max-width: none; }
 div.case img, div.case video { max-width: 100%; height: auto; }
 /* Vorige/volgende case: alleen op mobiel, alleen pijlen */
 .case-nav { display: none; }
@@ -385,7 +389,7 @@ div.case img, div.case video { max-width: 100%; height: auto; }
   .content { margin-left: 0; padding: 84px 20px 48px; }
   html.no-js .content { padding-top: 24px; }
   /* Video's full-bleed: tekst houdt zijn zijmarge, media loopt tot de rand */
-  div.case { margin-left: -20px; margin-right: -20px; width: auto; }
+  div.case, div.case:has(.video-square-wrapper), div.case:has(.video-portrait-wrapper) { margin-left: -20px; margin-right: -20px; width: auto; max-width: none; }
   .video-container-horizontal { margin-left: -20px; margin-right: -20px; }
   .video-container-horizontal .case { margin-left: 0; margin-right: 0; }
   .case-nav a { font-size: 14px; }
